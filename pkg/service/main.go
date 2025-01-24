@@ -57,5 +57,7 @@ func handleAnyCrash(w http.ResponseWriter, r *http.Request) {
 
 func crashMe() {
 	time.Sleep(1 * time.Second)
-	log.Fatal("Going to crash, bye! :-(")
+	//Fatal log calls for os.exit, which exits to golang program, hencee it has been replacedd with accepted log level Warning.
+	log.Warn("Going to crash, bye! :-(")
+	//log.Fatal("Going to crash, bye! :-(")
 }
