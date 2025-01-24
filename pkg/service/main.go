@@ -50,12 +50,14 @@ func handleAnyRoot(w http.ResponseWriter, r *http.Request) {
 func handleAnyCrash(w http.ResponseWriter, r *http.Request) {
 	log.WithField("remote_address", r.RemoteAddr).
 		Warn("Got /crash request, will be happening in 1s...")
-	_, _ = fmt.Fprint(w, "I'm going to crash now...")
+	_, _ = fmt.Fprint(w, "I'm going to log crash message now...")
 
 	go crashMe()
 }
 
 func crashMe() {
 	time.Sleep(1 * time.Second)
-	log.Fatal("Going to crash, bye! :-(")
+	//Fatal log calls for os.exit, which exits to golang program, hence it has been replacedd with accepted log level Warning.
+	log.Warn("Going to crash, bye! :-(")
+	//log.Fatal("Going to crash, bye! :-(")
 }
